@@ -309,7 +309,8 @@ Run server locally
 npm run serve
 ```
 
-Server will run on client: 8080
+Server will run on port: 8080
+
 Frontend:
 
 Assuming we already have Node.js from the backend installation
