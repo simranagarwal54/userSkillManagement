@@ -302,6 +302,7 @@ with backend as current directory
 
 Install dependencies
 ```
+npm install nodemon --save-dev
 npm install
 ```
 Run server locally
@@ -309,7 +310,8 @@ Run server locally
 npm run serve
 ```
 
-Server will run on client: 8080
+Server will run on port: 8080
+
 Frontend:
 
 Assuming we already have Node.js from the backend installation
@@ -323,6 +325,8 @@ Run client locally
 ```
 ng serve
 ```
+open your browser on http://localhost:4200/
+---------------------
 ## Enhancements
 
 Unit Tests
