@@ -1,0 +1,12 @@
+<div>
+<div class="sidenav">
+  <a href="#" class="active">WorkGenius Admin Dashboard</a>
+  <a href="#users" routerLink="users" (click)="navTo('users')">Manage Users</a>
+  <a href="#skills" routerLink="skills" (click)="navTo('skills')">Manage Skills</a>
+  <a href="#contact">Contact</a>
+</div>
+
+  <div class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>

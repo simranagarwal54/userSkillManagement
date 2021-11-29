@@ -1,0 +1,127 @@
+const db = require('../models');
+const User = db.User;
+
+const Op = db.Sequelize.Op;
+
+// Create and Save a new User 
+exports.create = (req, res) => {
+  // Validate request
+  if (!req.body.email) {
+    res.status(400).send({
+      message: "Email can not be empty!"
+    });
+    return;
+  }
+
+  // Create a User
+  const user = {
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  };
+
+  // Save User in the database
+  User.create(user)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the User."
+      });
+    });
+};
+
+// Retrieve all Users from the database.
+exports.findAll = (req, res) => {
+  const email = req.query.email; //req.query.title to get query string from the Request and consider it as condition for findAll() method.
+  var condition = email ? { email: { [Op.like]: `%${email}%` } } : null;
+
+  User.findAll({
+    where: condition,
+    include: [{
+      model: db.Skill,
+      attributes: ['name','description'],
+    }]
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    });
+};
+
+// Find a single User with a id  
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+  User.findByPk(id)
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find User with id=${id}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving User with id=" + id
+      });
+    });
+};
+
+// Update a user by the email in the request
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  User.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "User was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update User with email=${id}. Maybe User was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating User with email=" + id
+      });
+    });
+};
+
+// Delete a Tutorial with the specified id in the request
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  User.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "User was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete User with email=${id}. Maybe User was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete User with id=" + id
+      });
+    });
+};

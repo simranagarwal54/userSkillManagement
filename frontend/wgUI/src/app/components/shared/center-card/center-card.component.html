@@ -1,0 +1,53 @@
+<div class="card text-center">
+    <div class="card-header">
+      {{view}} Manager
+    </div>
+    <div class="card-body">
+      <p class="card-text">These are {{view}} that are present with WG today.</p>
+
+      <form>
+        <div class="form-group">
+          <label for="sel1">Select {{view}} (select one):</label>
+          <select class="skillDropdownForm form-control" id="skillDropdown" (change)="triggerDropDownChange($event)">
+            <option selected value="">Open this select menu</option>
+            <option *ngFor="let record of gridData">{{record[field]}}</option>
+          </select>
+          <br>
+        </div>
+      </form>
+    
+      <div class="add-skill-modal" *ngIf="showAddskillButton">
+        <button class="btn btn-primary" [disabled]="!showOptions" (click)="openModal()">Add {{nonView}}</button>
+      </div>
+      <div>
+        <button type="button" class="view-table-btn btn btn-primary" [disabled]="!showOptions" (click)="collapse.toggle();retriveUserSkillTable()">
+          View Table
+        </button>
+      </div>
+      <ng-template #newModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Add new {{nonView}}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click'); closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-add-skill-form [userData]="mainData"></app-add-skill-form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Cross Click'); closeModal()">Close</button>
+        </div>
+      </ng-template>
+      
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <div class="card table-card">
+          <div class="card-body">
+            <app-grid *ngIf="showGrid" [colData]="colData" [gridData]="userSkillData"></app-grid>
+          </div>
+        </div>
+      </div>
+      <!-- <app-grid [colData]="colData" [gridData]="userSkillData"></app-grid> -->
+    </div>
+    <div class="card-footer text-muted">
+    </div>
+  </div>

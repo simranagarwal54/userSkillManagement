@@ -1,0 +1,56 @@
+<div class="main">
+  <app-center-card [view]="view" [dataService]="service" [triggerRefresh]="triggerRefresh"></app-center-card>
+
+  <div class="card">
+    <div class="card-body">
+      Add a new skill to the database 
+      <button class="action-btn btn btn-primary" (click)="openModal()">Add</button>
+    </div>
+  </div>
+  <ng-template #newModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add new Skills</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click');closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-add-skill-form [action]="'addSkill'"></app-add-skill-form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Cross Click'); closeModal()">Close</button>
+    </div>
+  </ng-template>
+  
+  <div class="card">
+    <div class="card-body">
+      Edit an existing skill in the database 
+      <button class="action-btn btn btn-primary" (click)="openModal2()">Edit</button>
+    </div>
+  </div>
+  <ng-template #newModal2 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit existing Skills</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click');closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-add-skill-form [action]="'editSkill'"></app-add-skill-form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Cross Click'); closeModal()">Close</button>
+    </div>
+  </ng-template>
+  
+
+
+
+
+
+
+
+
+
+
+
