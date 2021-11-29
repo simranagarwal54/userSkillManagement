@@ -297,6 +297,7 @@ Backend
 Install node [here](https://nodejs.org/en/download/)
 
 Install mysql [here](https://dev.mysql.com/downloads/installer/)
+>>create a local mySql server: root with password: mysqlpassword1 (Sequelize has this configurations) and create a database wg
 
 with backend as current directory
 
