@@ -323,6 +323,8 @@ Run client locally
 ```
 ng serve
 ```
+open your browser on http://localhost:4200/
+---------------------
 ## Enhancements
 
 Unit Tests
