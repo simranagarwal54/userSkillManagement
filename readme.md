@@ -302,6 +302,7 @@ with backend as current directory
 
 Install dependencies
 ```
+npm install nodemon --save-dev
 npm install
 ```
 Run server locally
